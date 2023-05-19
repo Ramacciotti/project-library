@@ -10,4 +10,6 @@ public interface BookService {
 
     List<BookDTO> searchBookByKeyword(String keyword);
 
+    void registerBook(BookDTO bookDTO);
+
 }

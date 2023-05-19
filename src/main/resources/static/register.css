@@ -12,10 +12,6 @@ h2 {
     margin-bottom: 30px;
 }
 
-.search-button {
-    margin-left: 10px;
-}
-
 .search-input {
     flex: 1;
     margin-right: 10px;
@@ -23,4 +19,5 @@ h2 {
 
 .table-container {
     overflow-x: auto;
-}}
+}
+

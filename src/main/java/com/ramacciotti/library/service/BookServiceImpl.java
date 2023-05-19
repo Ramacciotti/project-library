@@ -6,6 +6,7 @@ import com.ramacciotti.library.repository.BookRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,6 +63,27 @@ public class BookServiceImpl implements BookService {
         }
 
         return resultDTOList;
+
+    }
+
+    @Override
+    @Transactional
+    public void registerBook(BookDTO bookDTO) {
+
+        log.info(">> service: registerBook()");
+
+        Book existingBook = bookRepository.findByTitleAndAuthor(bookDTO.getTitle(), bookDTO.getAuthor());
+
+        if (existingBook != null) {
+            throw new RuntimeException("Livro com o mesmo título e autor já existe");
+        }
+
+        Book book = new Book()
+                .withAuthor(bookDTO.getAuthor())
+                .withTitle(bookDTO.getTitle())
+                .withSynopsis(bookDTO.getSynopsis());
+
+        bookRepository.save(book);
 
     }
 
