@@ -41,4 +41,28 @@ public class BookServiceImpl implements BookService {
 
     }
 
+    @Override
+    public List<BookDTO> searchBookByKeyword(String keyword) {
+
+        log.info(">> service: searchBookByKeyword()");
+
+        List<BookDTO> resultDTOList = new ArrayList<>();
+
+        List<Book> books = bookRepository.findBookByKeyword(keyword);
+
+        for (Book book : books) {
+
+            BookDTO bookDTO = new BookDTO()
+                    .withTitle(book.getTitle())
+                    .withAuthor(book.getAuthor())
+                    .withSynopsis(book.getSynopsis());
+
+            resultDTOList.add(bookDTO);
+
+        }
+
+        return resultDTOList;
+
+    }
+
 }

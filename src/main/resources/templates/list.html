@@ -1,34 +1,77 @@
-<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
-<html>
+<!DOCTYPE html>
+
+<html lang="en">
+
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Book List</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" type="text/css" href="/list.css">
 </head>
+
 <body>
+
 <div class="container bcontent">
-    <h2 class="test">Book List</h2>
-    <table class="table">
+
+    <h2>Book List</h2>
+
+    <form id="searchForm">
+        <div class="form-group search-container">
+            <input type="text" class="form-control search-input" name="keyword" placeholder="Keyword">
+            <button type="submit" class="btn btn-primary">Search</button>
+        </div>
+    </form>
+
+    <table id="bookTable" class="table">
+
         <thead>
-        <tr>
-            <th>Title</th>
-            <th>Author</th>
-            <th>Synopsis</th>
-        </tr>
+            <tr>
+                <th style="width: 30%;">Title</th>
+                <th style="width: 30%;">Author</th>
+                <th>Synopsis</th>
+            </tr>
         </thead>
-        <tbody>
-        <tr th:each="book: ${books}">
-            <td th:text="${book.title}">Title</td>
-            <td th:text="${book.author}">Author</td>
-            <td th:text="${book.synopsis}">Synopsis</td>
-        </tr>
+
+        <tbody id="bookList">
+            <tr th:each="book: ${books}">
+                <td th:text="${book.title}">Title</td>
+                <td th:text="${book.author}">Author</td>
+                <td th:text="${book.synopsis}">Synopsis</td>
+            </tr>
         </tbody>
+
     </table>
+
 </div>
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script>
+        $(document).ready(function () {
+            $('#searchForm').submit(function (event) {
+                event.preventDefault();
+                var keyword = $('input[name="keyword"]').val();
+
+                $.get('/bookstore/search', { keyword: keyword })
+                    .done(function (data) {
+                        var bookList = $('#bookList');
+                        bookList.empty();
+                        $.each(data, function (index, book) {
+                            var row = $('<tr>');
+                            row.append($('<td>').text(book.title));
+                            row.append($('<td>').text(book.author));
+                            row.append($('<td>').text(book.synopsis));
+                            bookList.append(row);
+                        });
+                    })
+                    .fail(function (xhr, status, error) {
+                        console.log("Error:", error);
+                    });
+            });
+        });
+
+</script>
+
 </body>
+
 </html>

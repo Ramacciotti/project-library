@@ -2,6 +2,21 @@ h2 {
     margin: 32px 0;
 }
 
-th{
-    width: 25%;
-}
+.bcontent {
+            margin-top: 20px;
+        }
+
+        .search-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .search-input {
+            flex: 1;
+            margin-right: 10px;
+        }
+
+        .table-container {
+            overflow-x: auto;
+        }}

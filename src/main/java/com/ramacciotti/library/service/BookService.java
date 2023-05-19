@@ -8,4 +8,6 @@ public interface BookService {
 
     List<BookDTO> listAllBooks();
 
+    List<BookDTO> searchBookByKeyword(String keyword);
+
 }
