@@ -9,35 +9,29 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.With;
 
+import java.util.Date;
+
 @With
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class BookDTO {
+public class LoanDTO {
 
     @NotNull
     @NotEmpty
     @NotBlank
-    private String title;
+    private String name;
 
     @NotNull
     @NotEmpty
     @NotBlank
-    private String author;
+    private String cpf;
 
-    @NotNull
-    @NotEmpty
-    @NotBlank
-    private String shelf;
+    private Integer phone;
 
-    private String status;
+    private Date loanDate;
 
-    @NotNull
-    @NotEmpty
-    @NotBlank
-    private String synopsis;
-
-    private LoanDTO loan;
+    private Date returnDate;
 
 }

@@ -28,9 +28,11 @@
 
         <thead>
             <tr>
-                <th style="width: 30%;">Title</th>
-                <th style="width: 30%;">Author</th>
-                <th>Synopsis</th>
+                <th width="30%">Title</th>
+                <th width="30%">Author</th>
+                <th>Shelf</th>
+                <th>Status</th>
+                <th>Info</th>
             </tr>
         </thead>
 
@@ -38,7 +40,11 @@
             <tr th:each="book: ${books}">
                 <td th:text="${book.title}">Title</td>
                 <td th:text="${book.author}">Author</td>
-                <td th:text="${book.synopsis}">Synopsis</td>
+                <td th:text="${book.shelf}">Shelf</td>
+                <td th:text="${book.status}">Status</td>
+                <td>
+                    <a th:href="@{/bookstore/loan(title=${book.title}, author=${book.author})}" class="btn btn-secondary btn-square">O</a>
+                </td>
             </tr>
         </tbody>
 
@@ -61,7 +67,8 @@
                             var row = $('<tr>');
                             row.append($('<td>').text(book.title));
                             row.append($('<td>').text(book.author));
-                            row.append($('<td>').text(book.synopsis));
+                            row.append($('<td>').text(book.shelf));
+                            row.append($('<td>').text(book.status));
                             bookList.append(row);
                         });
                     })

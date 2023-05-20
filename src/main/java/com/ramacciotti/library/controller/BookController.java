@@ -58,4 +58,13 @@ public class BookController {
         return new ModelAndView("redirect:/bookstore/list");
     }
 
+    @GetMapping("/loan")
+    public ModelAndView loanBook(@RequestParam("title") String title, @RequestParam("author") String author) {
+        log.info(">> controller: loanBook()");
+        ModelAndView modelAndView = new ModelAndView("loan.html");
+        modelAndView.addObject("title", title);
+        modelAndView.addObject("author", author);
+        return modelAndView;
+    }
+
 }

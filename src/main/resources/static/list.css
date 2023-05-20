@@ -24,3 +24,7 @@ h2 {
 .table-container {
     overflow-x: auto;
 }}
+
+.table td, .table th {
+    vertical-align: none;
+}

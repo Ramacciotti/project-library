@@ -32,7 +32,9 @@ public class BookServiceImpl implements BookService {
             BookDTO bookDTO = new BookDTO()
                     .withTitle(book.getTitle())
                     .withAuthor(book.getAuthor())
-                    .withSynopsis(book.getSynopsis());
+                    .withSynopsis(book.getSynopsis())
+                    .withStatus(book.getStatus())
+                    .withShelf(book.getShelf());
 
             resultDTOList.add(bookDTO);
 
@@ -56,7 +58,9 @@ public class BookServiceImpl implements BookService {
             BookDTO bookDTO = new BookDTO()
                     .withTitle(book.getTitle())
                     .withAuthor(book.getAuthor())
-                    .withSynopsis(book.getSynopsis());
+                    .withSynopsis(book.getSynopsis())
+                    .withStatus(book.getStatus())
+                    .withShelf(book.getShelf());
 
             resultDTOList.add(bookDTO);
 
@@ -81,7 +85,9 @@ public class BookServiceImpl implements BookService {
         Book book = new Book()
                 .withAuthor(bookDTO.getAuthor())
                 .withTitle(bookDTO.getTitle())
-                .withSynopsis(bookDTO.getSynopsis());
+                .withSynopsis(bookDTO.getSynopsis())
+                .withShelf(bookDTO.getShelf())
+                .withStatus("available");
 
         bookRepository.save(book);
 

@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -12,34 +13,37 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.With;
 
+import java.util.Date;
+
 @With
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "book")
-public class Book {
+@Table(name = "loan")
+public class Loan {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
-    private String title;
+    @OneToOne
+    @JoinColumn(name = "book_id")
+    private Book book;
 
-    @Column(nullable = false)
-    private String author;
+    @Column
+    private String name;
 
-    @Column(nullable = false)
-    private String status;
+    @Column
+    private String cpf;
 
-    @Column(nullable = false)
-    private String shelf;
+    @Column
+    private Integer phone;
 
-    @Column(nullable = false)
-    private String synopsis;
+    @Column
+    private Date loanDate;
 
-    @OneToOne(mappedBy = "book")
-    private Loan loan;
+    @Column
+    private Date returnDate;
 
 }
